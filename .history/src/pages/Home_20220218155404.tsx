@@ -10,15 +10,15 @@ import googleIconImg from '../assets/images/google-icon.svg'
 
 import { Button } from '../components/Button'
 
-import { TextContext } from '../App'
+import { TextContext } from '../routes'
 
 import '../styles/auth.scss'
 
 export function Home(){
   const navigate = useNavigate();
   const navigating = () => navigate('/rooms/new');
-  
-  const value = useContext(TextContext);
+
+  const value = useContext(TextContext)
 
   function handleCreateRoom(){
     const provider = new firebase.auth.GoogleAuthProvider();
