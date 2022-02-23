@@ -1,18 +1,19 @@
-import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+
+import { Link } from 'react-router-dom';
 
 import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg'
 
 import { Button } from '../components/Button'
 
-import { AuthContext } from '../App';
+import { TextContext } from '../App'
 
-import '../styles/auth.scss' 
-
+import '../styles/auth.scss'
 
 export function NewRoom(){
-  const { user } = useContext( AuthContext );
+
+  const { value, setValue } = useContext(TextContext);
 
   return (
     <div id="page-auth">
@@ -22,9 +23,9 @@ export function NewRoom(){
         <p>Tire as dúvidas da sua audiência em tempo real</p>
       </aside>
       <main>
+          <h1>{value}</h1>
           <div className="main-content">
             <img src={logoImg} alt="Letmeask" />
-            <h1>{user?.name}</h1>
             <h2>Criar uma nova sala</h2>
             <form action="">
               <input type="text" placeholder="Nome da sala" />

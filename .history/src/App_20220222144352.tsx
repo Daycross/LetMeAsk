@@ -20,8 +20,6 @@ export const AuthContext = createContext({} as AuthContextType);
 
 function App() {
   const [user, setUser] = useState<User>();
-    
-  useEffect(() => {
     auth.onAuthStateChanged(user => {
       if(user){
         const { displayName, photoURL, uid } = user;
@@ -35,6 +33,8 @@ function App() {
         })
       }
     })
+  useEffect(() => {
+
   },[])
 
   async function signInWithGoogle(){
