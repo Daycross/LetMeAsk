@@ -34,10 +34,6 @@ export function NewRoom(){
       title: newRoom,
       authorId: user?.id,
     })
-
-    navigate(`/rooms/${firebaseRoom.key}`)
-  }
-
   return(
       <div id="page-auth">
       <aside>

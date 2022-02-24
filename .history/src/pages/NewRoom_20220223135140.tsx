@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { database } from '../services/firebase'
 // import { useContext } from 'react';
@@ -19,8 +19,6 @@ export function NewRoom(){
   const { user } = useAuth();
   const [ newRoom, setNewRoom ] = useState('');
 
-  const navigate = useNavigate();
-
   async function handleCreateRoom(event: FormEvent){
     event.preventDefault();
 
@@ -34,12 +32,10 @@ export function NewRoom(){
       title: newRoom,
       authorId: user?.id,
     })
-
-    navigate(`/rooms/${firebaseRoom.key}`)
   }
 
-  return(
-      <div id="page-auth">
+  return (
+    <div id="page-auth">
       <aside>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>

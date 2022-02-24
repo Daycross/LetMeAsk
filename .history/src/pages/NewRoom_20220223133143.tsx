@@ -1,8 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { useAuth } from '../hooks/useAuth'
-import { Link, useNavigate } from 'react-router-dom';
-
-import { database } from '../services/firebase'
+import { Link } from 'react-router-dom';
 // import { useContext } from 'react';
 
 import illustrationImg from '../assets/images/illustration.svg'
@@ -16,30 +13,18 @@ import '../styles/auth.scss'
 
 
 export function NewRoom(){
-  const { user } = useAuth();
-  const [ newRoom, setNewRoom ] = useState('');
+  // const { user } = useContext( AuthContext );
 
-  const navigate = useNavigate();
+  const [ newRoom, setNewRoom ] = useState('');
 
   async function handleCreateRoom(event: FormEvent){
     event.preventDefault();
 
-    if(newRoom.trim() === ''){
-      return;
-    }
-
-    const roomRef = database.ref('rooms');
-
-    const firebaseRoom = await roomRef.push({
-      title: newRoom,
-      authorId: user?.id,
-    })
-
-    navigate(`/rooms/${firebaseRoom.key}`)
+    console.log(newRoom);
   }
 
-  return(
-      <div id="page-auth">
+  return (
+    <div id="page-auth">
       <aside>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>

@@ -3,8 +3,6 @@ import { FormEvent, useState } from 'react'
 
 import { useAuth } from '../hooks/useAuth'
 
-import { database } from '../services/firebase'
-
 import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg'
 import googleIconImg from '../assets/images/google-icon.svg'
@@ -28,19 +26,6 @@ export function Home(){
 
   async function handleJoinRoom(event: FormEvent){
     event.preventDefault();
-
-    if(roomCode.trim() === ''){
-      return
-    }
-
-    const roomRef = await database.ref(`rooms/${roomCode}`).get();
-
-    if(!roomRef.exists()){
-      alert('Room does not exists.');
-      return;
-    }
-
-    navigate(`/rooms/${roomCode}`);
   }
 
   return (
