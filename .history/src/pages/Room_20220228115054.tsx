@@ -9,27 +9,26 @@ import { RoomCode } from '../components/RoomCode';
 import '../styles/room.scss';
 import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
-import { Question } from '../components/Question';
 
 type FirebaseQuestions = Record<string, {
   author: {
-    name: string;
-    avatar: string;
-  }
+    nome: string,
+    avatar: string,
+  },
   content: string,
   isAnswered: boolean,
   isHighLighted: boolean
 }>
 
-type QuestionType = {
-  id: string;
+type Question = {
+  id: string,
   author: {
-    name: string;
-    avatar: string;
-  }
-  content: string;
-  isAnswered: boolean;
-  isHighLighted: boolean;
+    nome: string,
+    avatar: string,
+  },
+  content: string,
+  isAnswered: boolean,
+  isHighLighted: boolean
 }
 
 type RoomParams = {
@@ -41,7 +40,7 @@ export function Room(){
   const { user } = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
-  const [questions, setQuestions] = useState<QuestionType[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [title, setTitle] = useState('');
 
   const roomId = params.id || 'default';
@@ -49,11 +48,11 @@ export function Room(){
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
 
-    roomRef.on('value', room => {
+    roomRef.once('value', room => {
       const databaseRoom = room.val();
-      const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
+      const FirebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
 
-      const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
+      const parsedQuestions = Object.entries(FirebaseQuestions).map(([key, value]) => {
         return {
           id: key,
           content: value.content,
@@ -104,7 +103,7 @@ export function Room(){
       <main>
         <div className="room-title">
           <h1>Sala {title}</h1>
-          {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
+          <span>4 perguntas</span>
         </div>
         <form onSubmit={handleSendQuestion}>
           <textarea 
@@ -125,17 +124,6 @@ export function Room(){
             <Button disabled={!user} type="submit">Enviar pergunta</Button>
           </div>
         </form>
-        <div className="question-list">
-          {questions.map(question => {
-            return (
-              <Question
-                key={question.id}
-                content={question.content}
-                author={question.author}
-              />
-            )
-          })}
-        </div>
       </main>
     </div>
   );

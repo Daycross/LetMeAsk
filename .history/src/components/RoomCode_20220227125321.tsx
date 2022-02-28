@@ -1,0 +1,12 @@
+import copyImg from '../assets/images/copy.svg'
+
+export function RoomCode(){
+  return(
+    <button className="room-code">
+      <div>
+        <img src={copyImg} alt="Imagem da ação " />
+      </div>
+
+    </button>
+  )
+}

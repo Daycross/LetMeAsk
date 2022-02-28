@@ -21,7 +21,7 @@ type FirebaseQuestions = Record<string, {
   isHighLighted: boolean
 }>
 
-type QuestionType = {
+type Question = {
   id: string;
   author: {
     name: string;
@@ -41,7 +41,7 @@ export function Room(){
   const { user } = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
-  const [questions, setQuestions] = useState<QuestionType[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [title, setTitle] = useState('');
 
   const roomId = params.id || 'default';
@@ -129,7 +129,6 @@ export function Room(){
           {questions.map(question => {
             return (
               <Question
-                key={question.id}
                 content={question.content}
                 author={question.author}
               />
