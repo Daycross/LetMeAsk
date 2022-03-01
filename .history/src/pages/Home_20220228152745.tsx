@@ -42,7 +42,7 @@ export function Home(){
 
     if(roomRef.val().endedAt) {
       alert('Room already closed');
-      return;
+      return
     }
 
     navigate(`/rooms/${roomCode}`);
